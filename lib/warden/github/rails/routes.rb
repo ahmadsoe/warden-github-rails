@@ -61,6 +61,8 @@ module Warden
             Array(teams).any? { |team| user.team_member?(Rails.team_id(team)) }
           elsif (org = options[:org] || options[:organization])
             user.organization_member?(org)
+          elsif (logins = options[:login])
+            Array(logins).any? { |login| user.login == login }
           else
             true
           end
